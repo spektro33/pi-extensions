@@ -70,12 +70,13 @@ test("session start warns for deprecated PI_CAFFEINATE_ICON", async (t) => {
 
 	assert.equal(notifications.length, 1);
 	assert.match(notifications[0]?.message ?? "", /PI_CAFFEINATE_ICON is deprecated/);
-	assert.match(notifications[0]?.message ?? "", /If you use @narumitw\/pi-statusline/);
+	assert.match(notifications[0]?.message ?? "", /extensionStatusIcons\.caffeinate/);
 });
 
 test("windowsInhibitorScript uses unsigned flags and releases on exit", () => {
 	assert.match(windowsInhibitorScript("sleep"), /\[uint32\]'0x80000001'/);
 	assert.match(windowsInhibitorScript("display"), /\[uint32\]'0x80000003'/);
 	assert.match(windowsInhibitorScript("display"), /\[uint32\]'0x80000000'/);
+	assert.equal(formatMode("sleep"), "system-awake");
 	assert.equal(formatMode("display"), "display-awake");
 });
